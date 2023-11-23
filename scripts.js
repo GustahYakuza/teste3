@@ -1,9 +1,4 @@
-let compliments = [
-    "Você é incrível!",
-    "Seu sorriso ilumina meu dia!",
-    "Ninguém é tão especial quanto você!",
-    // Adicione mais elogios conforme desejado
-];
+let compliments = [];
 
 function showRandomCompliment() {
     const randomIndex = Math.floor(Math.random() * compliments.length);
@@ -15,5 +10,16 @@ function showRandomCompliment() {
 
 document.getElementById('changeCompliment').addEventListener('click', showRandomCompliment);
 
-// Mostra um elogio ao carregar a página
-showRandomCompliment();
+// Adicione essa função para carregar os elogios do arquivo JSON
+function loadCompliments() {
+    fetch('compliments.json')
+        .then(response => response.json())
+        .then(data => {
+            compliments = data;
+            showRandomCompliment();
+        })
+        .catch(error => console.error('Erro ao carregar os elogios:', error));
+}
+
+// Carrega os elogios ao iniciar o script
+loadCompliments();

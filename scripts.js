@@ -1,25 +1,24 @@
-let compliments = [];
+document.addEventListener("DOMContentLoaded", function () {
+    // Array de elogios automáticos
+    const compliments = [
+        "Você é incrível!",
+        "Sua bondade ilumina o meu dia!",
+        "Com você, cada momento é especial."
+        // Adicione mais elogios conforme desejar
+    ];
 
-function showRandomCompliment() {
-    const randomIndex = Math.floor(Math.random() * compliments.length);
-    const compliment = compliments[randomIndex];
+    // Elemento de elogio automático
+    const complimentText = document.getElementById("compliment-text");
 
-    const complimentElement = document.querySelector('.compliment-text');
-    complimentElement.textContent = compliment;
-}
+    // Função para exibir elogios automáticos aleatórios
+    function displayRandomCompliment() {
+        const randomIndex = Math.floor(Math.random() * compliments.length);
+        complimentText.textContent = compliments[randomIndex];
+    }
 
-document.getElementById('changeCompliment').addEventListener('click', showRandomCompliment);
+    // Exiba um elogio automático ao carregar a página
+    displayRandomCompliment();
 
-// Adicione essa função para carregar os elogios do arquivo JSON
-function loadCompliments() {
-    fetch('compliments.json')
-        .then(response => response.json())
-        .then(data => {
-            compliments = data;
-            showRandomCompliment();
-        })
-        .catch(error => console.error('Erro ao carregar os elogios:', error));
-}
-
-// Carrega os elogios ao iniciar o script
-loadCompliments();
+    // Atualize o elogio automaticamente a cada 10 segundos (10000 milissegundos)
+    setInterval(displayRandomCompliment, 10000);
+});
